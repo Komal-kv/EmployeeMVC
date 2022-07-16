@@ -1,0 +1,93 @@
+﻿@model ModelLayer.EmployeeModel
+
+@{
+    ViewData["Title"] = "AddEmployee";
+}
+
+<div class="header-content header">
+    <div class="logo">
+        <a class="icon"> <img src="~/Asset/logo.png"></a>
+        <div >
+            <span class="emp-text">EMPLOYEE</span><br>
+            <span class="emp-text payroll">PAYROLL</span>
+        </div>
+    </div>
+</div>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-head">Employee Payroll Form</div>
+        <form asp-action="AddEmployee">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group">
+                <label asp-for="EmployeeId" class="control-label"></label>
+                <input asp-for="EmployeeId" class="form-control" />
+                <span asp-validation-for="EmployeeId" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProfileImage" class="control-label"></label>
+                <div class="profile-radio-content profile-control">
+                    @Html.RadioButtonFor(model => model.ProfileImage, "~/Assets/Male (1).png")
+                            <img class="Profile-image-1 " src = "~/Asset/Male (1).png"  />
+                    @Html.RadioButtonFor(model => model.ProfileImage, "~/Assets/Female (3).png")
+                            <img class="Profile-image-2 " src = "~/Asset/Female (3).png"  />
+                    @Html.RadioButtonFor(model => model.ProfileImage, "~/Assets/Male (2).png")
+                            <img class="Profile-image-3 " src = "~/Asset/Male (2).png"  />
+                    @Html.RadioButtonFor(model => model.ProfileImage, "~/Assets/Female (5).png")
+                            <img class="Profile-image-4 " src = "~/Asset/Female (5).png"  />
+                </div>
+                <span asp-validation-for="ProfileImage" class="text-danger"></span>
+            </div>
+       
+            <div class="form-group">
+                <label asp-for="Gender" class="control-label"></label>
+                <div class="genderSection">
+                        <input asp-for="Gender" type="radio" id="male" name="gender" value="male">
+                        <label asp-for="Gender" class="text" for="male">Male</label>
+                        <input asp-for="Gender" type="radio" id="female" name="gender" value="female">
+                        <label asp-for="Gender" class="text" for="female">Female</label>
+                </div>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Department" class="control-label"></label>
+                <input asp-for="Department" class="form-control" />
+                <span asp-validation-for="Department" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Salary" class="control-label"></label>
+                <input asp-for="Salary" class="form-control" />
+                <span asp-validation-for="Salary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label"></label>
+                <input asp-for="StartDate" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Notes" class="control-label"></label>
+                <input asp-for="Notes" class="form-control" placeholder="Notes..." style="height:100px" />
+                <span asp-validation-for="Notes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <input asp-action="ListOfEmployee" type="submit" value="Back to List" class="btn btn-primary ml-auto" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="ListOfEmployee">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
