@@ -21,7 +21,7 @@ namespace EmployeePayrollMVC.Controllers
             return View(allEmployees);
         }
 
-        // Add new employee
+        //For adding new employee
 
         [HttpGet]
         public IActionResult AddEmployee()
@@ -35,6 +35,61 @@ namespace EmployeePayrollMVC.Controllers
             if (ModelState.IsValid)
             {
                 employeeBL.AddEmployee(employee);
+                return RedirectToAction("ListOfEmployee");
+            }
+            return View(employee);
+        }
+
+        //To delete the particular employee
+        [HttpGet]
+        public IActionResult DeleteEmployee(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            EmployeeModel employee = employeeBL.GetEmployeeData(id);
+            if (employee == null)
+            {
+                return NotFound();
+            }
+            return View(employee);
+        }
+
+        [HttpPost, ActionName("DeleteEmployee")]
+        public IActionResult DeleteConfirmed(int? id)
+        {
+            employeeBL.DeleteEmployee(id);
+            return RedirectToAction("ListOfEmployee");
+        }
+
+        //For updating employee details
+        [HttpGet]
+        public IActionResult UpdateEmployee(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            EmployeeModel employee = employeeBL.GetEmployeeData(id);
+
+            if (employee == null)
+            {
+                return NotFound();
+            }
+            return View(employee);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateEmployee(int id, [Bind] EmployeeModel employee)
+        {
+            if (id != employee.EmployeeId)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                employeeBL.UpdateEmployee(employee);
                 return RedirectToAction("ListOfEmployee");
             }
             return View(employee);
