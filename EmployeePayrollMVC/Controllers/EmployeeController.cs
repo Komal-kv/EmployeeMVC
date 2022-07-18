@@ -55,6 +55,7 @@ namespace EmployeePayrollMVC.Controllers
             }
             return View(employee);
         }
+
         [HttpPost, ActionName("DeleteEmployee")]
         public IActionResult DeleteConfirmed(int? id)
         {
